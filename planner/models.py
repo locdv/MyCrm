@@ -13,13 +13,45 @@ from common.utils import EVENT_PARENT_TYPE, EVENT_STATUS
 # Create your models here.
 
 class Reminder(models.Model):
+    """
+    thông tin Reminder
+    reminder_type: loại reminder
+    reminder_time: thời gian bắt đầu reminder.
+    """
     reminder_type = models.CharField(max_length=5, blank=True, null=True)
     reminder_time = models.IntegerField(pgettext_lazy("time of the reminder to evenet in Seconds", "Reminder"), blank=True, null=True)
     def __str__(self):
         return self.reminder_type
 
 
-class Event(models.Model):
+class Event(models.Model):  
+    """
+    thông tin event
+    limit: giới hạn đối tượng có event
+    name: tên event
+    event_type: loại event
+    content_type: loại content. Là 1 trong 4 giá trị của limit
+    object_id: id của event
+    parent: đối tượng parent của event. this is account, lead, opportunity, case
+    status: trạng thái của event: giá trị enum: EVENT_STATUS
+    direction: chỉ dẫn liên quan event
+    start_date: ngày bắt đầu event
+    close_date: ngày kết thúc
+    duration: thời gian kéo dài event
+    reminders: reminder cho event
+    priority: mức độ ưu tiên của even
+    updated_on: thời điểm cập nhật event
+    updated_by: user cập nhật event
+    attendees_user: user tham dự event
+    attendees_contacts: contacts được mời tham gia
+    attendees_leads: leads được mời tham gia
+    created_on: thời gian tạo event
+    created_by: user tạo event
+    assigned_to: user chịu trách nhiệm
+    team: team chịu trách nhiệm
+    description: mô tả event
+    is_active: trạng thái event
+    """
     limit = models.Q(app_label='account', models='Account', id=10) | \
         models.Q(app_label='leads', model='Lead', id=13) | \
         models.Q(app_label='opportunity', model='Opportunity', id=14) | \

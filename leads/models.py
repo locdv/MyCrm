@@ -10,6 +10,28 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class Lead(models.Model):
+    """
+    thông tin về Lead
+    title: tiêu đề về lead
+    first_name: tên thật của Lead
+    last_name: tên họ của Lead
+    email: địa chỉ email
+    phone: số điện thoại
+    account: account liên quan đến lead. một account có thể có nhiều lead. quan hệ ở đây là many-to-one
+    status: trạng thái của lead. giá trị kiểu enum  LEAD_STATUS
+    source: nguồn gốc của Lead. nguồn gốc biết đến Lead
+    address: địa chỉ của Lead. Nhiều lead có thể có cùng địa chỉ. Quan hệ many-to-one
+    website: địa chỉ trang web của liên quan Lead
+    description: mô tả về lead
+    assigned_to: User được phân công Lead
+    teams: team được phân công Lead
+    account_name: tên account liên quan lead.
+    opportunity_amount:
+    created_by: user tạo lead
+    created_on: thời gian tạo lead
+    is_active: trạng thái của lead
+    enquery_type: kiểu yêu cầu của lead
+    """
     title = models.CharField(pgettext_lazy("Treatment Pronouns for the customer", "Title"), max_length=64, blank=True, null=True)
     first_name = models.CharField(("First name"), max_length=255)
     last_name = models.CharField(("Last name"), max_length=255)

@@ -2,7 +2,18 @@ from django.db import models
 from datetime import datetime
 # Create your models here.
 class Email(models.Model):
+    """
+    thông tin email
+    from_email: địa chỉ email của người gửi
+    to_email: địa chỉ email của người nhận
+    subject: tiêu đề của email
+    message: nội dung email
+    file: file được đính kèm trong email
+    send_time: thời gian gửi email
+    status: trạng thái của email
+    important: mức độ quan trọng của email
 
+    """
     from_email = models.EmailField(max_length=200)
     to_email = models.EmailField(max_length=200)
     subject = models.CharField(max_length=200)

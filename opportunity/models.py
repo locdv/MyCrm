@@ -14,6 +14,28 @@ from common.models import Team
 
 
 class Opportunity(models.Model):
+    """
+    name: tên của opportunity
+    account: account liên quan đến opportunity. Mỗi account có thể có nhiều opportunity. Quan hệ many-to-one
+    stage: giai đoạn của opportunity
+    currency: loại tiền tệ
+    amount: giá trị tiền của opportunity
+    lead_source: nguồn gốc của lead liên quan đến opportunity
+    propability: xác suất thành công của opportunity
+    contacts: contacts liên quan. Quan hệ many-to-many
+    closed_by: user đóng opportunity
+    closed_on: thời gian đóng
+    description: mô tả về opportunity
+    assigned_to: user được phân công.
+    teams: team được phân công
+    created_by: user tạo opportunity
+    created_on: thời gian tạo
+    is_active: trạng thái của opportunity
+
+
+
+
+    """
     name = models.CharField(pgettext_lazy("Name of Opportunity", "Name"), max_length=64)
     account = models.ForeignKey(Account, related_name='opportunity', on_delete=models.CASCADE, blank=True, null=True)
     stage = models.CharField(

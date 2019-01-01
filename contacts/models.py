@@ -9,7 +9,19 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Contact(models.Model):
     """
     thông tin của Contact
-    first_name: tên thật của 
+    first_name: tên thật của contact
+    last_name: tên đệm của contact
+    account: account liên quan contact. Một account có nhiều contact. Vì vậy quan hệ là many-to-one
+    email: địa chỉ email của contact
+    phone: số điện thoại của contact
+    address: địa chỉ của contact
+    description: mô tả thêm về contact
+    assigned_to: User được phân công cho contact. Mỗi user có thể được phân công nhiều contact. Mỗi contact
+    có thể được phân công tới nhiều user. Quan hệ many-to-many
+    teams: team được phân công contact. Quan hệ many-to-many
+    created_by: user tạo contact
+    created_on: thời gian tạo contact
+    is_active: trạng thái của contact.
 
 
     """

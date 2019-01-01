@@ -20,7 +20,7 @@ class Address(models.Model):
         address_line: tên đường
         street: tên phố:
         city: tên thành phố
-        state: tên tỉnh
+        state: tên bang
         postcode: mã vùng
         country: tên đất nước
     """
@@ -36,10 +36,10 @@ class Address(models.Model):
 
 class Team(models.Model):
     """
-    thông tin của Team
-    name: tên Team
-    members: các thành viên của team. Mỗi team có thể có nhiều member
-    mỗi member có thể thuộc nhiều team. Vì vậy quan hệ giữa Team và User là ManyToMany
+        thông tin của Team
+        name: tên Team
+        members: các thành viên của team. Mỗi team có thể có nhiều member
+        mỗi member có thể thuộc nhiều team. Vì vậy quan hệ giữa Team và User là ManyToMany
 
 
     """
@@ -53,16 +53,16 @@ class Team(models.Model):
 
 class Comment(models.Model):
     """
-    Thông tin của Comment
-    case: 
-    comment: nội dung comment 
-    commented_on: thời gian bắt đầu comment. Giá trị được tính tự động
-    commented_by: người comment. mỗi user có thể tạo nhiều comment. vì vậy quan hê.
-    Many-to-one
-    account: 
-    lead:
-    opportunity:
-    contact:
+        Thông tin của Comment
+        case: comment cho case nào.
+        comment: nội dung comment 
+        commented_on: thời gian bắt đầu comment. Giá trị được tính tự động
+        commented_by: người comment. mỗi user có thể tạo nhiều comment. vì vậy quan hê.
+        Many-to-one
+        account: account được comment
+        lead: lead được comment
+        opportunity: opportunity được comment
+        contact: contact được comment
     """
     case = models.ForeignKey('cases.Case', blank=True, null=True, related_name="cases", on_delete=models.CASCADE)
     comment = models.CharField(max_length=255)
@@ -80,7 +80,7 @@ class Comment(models.Model):
 
     def get_files(self):
         """
-        Query comment bởi Id
+            Query comment file bởi comment
         """
         return Comment_Files.object.filter(comment_id=self)
 
@@ -89,9 +89,9 @@ class Comment_Files(models.Model):
     """"
     File comment
     attribute thông tin
-    comment: đối tượng comment. 
+    comment: đối tượng comment. Mỗi comment có thể có nhiều comment_files. vì vậy quan hệ many-to-one
     updated_on: thời gian file được cập nhật
-    comment_file: file được comment
+    comment_file: file chứa nội dung comment
 
     """
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
@@ -107,6 +107,18 @@ class Comment_Files(models.Model):
 
 
 class Attachments(models.Model):
+    """
+    Thông tin attachment
+    created_by: user tạo attachment
+    file_name: tên attach
+    attachment: file được attach
+    lead: lead được attach
+    account: account được attach
+    contact: contact được attach
+    opportunity: opportunity được attach
+
+
+    """
     created_by = models.ForeignKey(
         User, related_name='attached_created_by', on_delete=models.CASCADE)
     file_name = models.CharField(max_length=60)
