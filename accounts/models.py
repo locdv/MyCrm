@@ -1,3 +1,7 @@
+"""
+account: thông tin của khách hàng, đối tác. Account đại diện cho công ty.
+
+"""
 from django.db import models
 from django.utils.translation import pgettext_lazy
 from django.utils.translation import ugettext_lazy as _

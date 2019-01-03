@@ -1,3 +1,8 @@
+"""
+    Lead: Thông tin về Lead. Lead là người quan tâm đến sản phầm của công ty. Chưa phải là khách hàng.
+    Chưa thông tin như một business card.
+"""
+
 from django.db import models
 from django.utils.translation import pgettext_lazy
 from django.utils.translation import ugettext_lazy as _

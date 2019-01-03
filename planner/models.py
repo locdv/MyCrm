@@ -1,3 +1,9 @@
+"""
+    Reminder: thông tin về bộ nhắc nhở liên quan đến Event
+    Event: thông tin về event. Đối tượng event là case, lead, account, opportunity
+
+"""
+
 from django.db import models
 from django.utils.translation import pgettext_lazy
 from django.utils.translation import ugettext_lazy as _

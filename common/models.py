@@ -1,3 +1,11 @@
+"""
+    address: thông tin về địa chỉ
+    team: thông tin về team trong công ty
+    commment: thông ti về comment. có thể comment cho case, account, lead...
+    comment_files: file được đính kèm với comment.
+    Attachments: file được đính kèm với email.
+
+"""
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from common.utils import COUNTRIES, ROLES

@@ -1,3 +1,8 @@
+"""
+    user trong hệ thống có 2 loại: user thường và admin.
+
+"""
+
 from django.utils.translation import ugettext_lazy as _
 
 
