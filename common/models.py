@@ -1,5 +1,5 @@
 """
-    address: thông tin về địa chỉ
+    address: thông tin về địa chỉ của khách hàng
     team: thông tin về team trong công ty
     commment: thông ti về comment. có thể comment cho case, account, lead...
     comment_files: file được đính kèm với comment.
@@ -24,7 +24,7 @@ def img_url(self, filename):
 
 
 class Address(models.Model):
-    """    thông tin của Address
+    """    thông tin của Address của khách hàng
         address_line: tên đường
         street: tên phố:
         city: tên thành phố

@@ -1,3 +1,7 @@
+"""
+    Contact: thông tin về contact. Contact là Lead đóng vai trò quyết định trong việc mua bán. Contact đại 
+    diện về mặt cá nhân.
+"""
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
