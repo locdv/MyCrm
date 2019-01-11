@@ -117,7 +117,8 @@ class AccountsListView(TemplateView):
     template_name = "accounts/list_accounts.html"
 
     def get_queryset(self):
-        queryset = self.model.objects.all().select_related("billing_address")
+        queryset = self.model.objects.all().select_related("billing_address").order_by('id')
+
         request_post = self.request.POST
         if request_post:
             if request_post.get('name'):
