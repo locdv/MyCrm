@@ -10,16 +10,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Django CRM</title>
-    <!-- Bootstrap core CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
-    <!-- Custom styling plus plugins -->
-    {% compress css %}
-      <link href="{% static 'css/main.scss' %}" type="text/x-scss" rel="stylesheet">
-    {% endcompress %}
-    {% block extralinks %}{% endblock %}
+   <!-- Fontfaces CSS-->
+
+   <link href="{%static 'css/font-face.css' %}" rel="stylesheet" media="all">
+
+   <link href="{%static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+
+   <link href="{%static 'vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+
+   <link href="{%static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+
+
+   <!-- Bootstrap CSS-->
+
+   <link href="{%static 'vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+
+
+   <!-- Vendor CSS-->
+
+   <link href="{%static 'vendor/animsition/animsition.min.css' %}" rel="stylesheet'" media="all">
+
+   <link href="{%static 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+
+   <link href="{%static 'vendor/wow/animate.css' %}" rel="stylesheet' %}" media="all">
+
+   <link href="{%static 'vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+
+   <link href="{%static 'vendor/slick/slick.css" rel="stylesheet' %}" media="all">
+
+   <link href="{%static 'vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+
+   <link href="{%static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+
+
+   <!-- Main CSS-->
+
+   <link href="{%static 'css/theme.css' %}" rel="stylesheet" media="all">
 </head>
 <body class="login_register_body">
 <div class="container">
