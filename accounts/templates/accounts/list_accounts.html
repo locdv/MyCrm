@@ -34,8 +34,8 @@
                     <i class="zmdi zmdi-filter-list"></i>filters</button>
             </div>
             <div class="table-data__tool-right">
-                <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                    <i class="zmdi zmdi-plus"></i>add item</button>
+                <a class="au-btn au-btn-icon au-btn--green au-btn--small" href="{% url 'accounts:create' %}">
+                    <i class="zmdi zmdi-plus"></i>add item</a>
                 <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">
                         <option selected="selected">Export</option>
@@ -71,18 +71,18 @@
                       
                         <td>
                             <div class="table-data-feature">
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Send" href="#">
                                     <i class="zmdi zmdi-mail-send"></i>
-                                </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                </a>
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Edit" href="{% url 'accounts:update' account.id %}">
                                     <i class="zmdi zmdi-edit"></i>
-                                </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                </a>
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Delete" href="{% url 'accounts:delete' account.id %}">
                                     <i class="zmdi zmdi-delete"></i>
-                                </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                </a>
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="More" href="{% url 'accounts:detail' account.id %}">
                                     <i class="zmdi zmdi-more"></i>
-                                </button>
+                                </a>
                             </div>
                         </td>
                     </tr>

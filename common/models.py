@@ -38,7 +38,7 @@ class Address(models.Model):
     city = models.CharField(_("City"), max_length=255, blank=True, null=True)
     state = models.CharField(_("State"), max_length=255, blank=True, null=True)
     postcode = models.CharField(_("Post/Zip-code"), max_length=64, blank=True, null=True)
-    contry = models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True)
+    country = models.CharField(max_length=3, choices=COUNTRIES, blank=True, null=True)
     def __str__(self):
         return self.city if self.city else ""
 

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'leads',
     'emails',
     'planner',
+    'sorl.thumbnail',
     'phonenumber_field',
     'compressor',
     'django.contrib.admin',
