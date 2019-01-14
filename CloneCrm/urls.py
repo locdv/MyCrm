@@ -22,7 +22,7 @@ urlpatterns = [
    # path('', include('common.urls', namespace="Common")),
     path('', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls', namespace="accounts")),
-    # path('leads/', include('lead.urls', namespace="leads")),
+    path('leads/', include('leads.urls', namespace="leads")),
     # path('contacts/', include('contacts.urls', namespace="contacts")),
     # path('opportunities/', include('opportunity.urls', namespace="opportunities")),
     # path('cases/', include('cases.urls', namespace="cases")),

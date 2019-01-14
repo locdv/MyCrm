@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
-
+{% load paginate %}
 {% block body_class %}template-homepage{% endblock %}
 
 
@@ -59,6 +59,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                        {% if per_page %}
+                        {% paginate per_page accounts_list %}
+                      {% else%}
+                        {% paginate 10 accounts_list %}
+                      {% endif %}
+                      
                     {% for account in accounts_list %}
                     <tr class="tr-shadow">
                         <td>{{ account.id }}</td>
@@ -90,6 +96,12 @@
                    {% endfor %}
                 </tbody>
             </table>
+            {% ifequal accounts_list|length 0 %}
+            <h6 class="text-center">No Acccount Records Found</h6>
+          {% endifequal %}
+          <div class="text-center row marl">
+            {% show_pages %}
+          </div>
         </div>
         <!-- END DATA TABLE -->
     </div>
