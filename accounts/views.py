@@ -96,6 +96,7 @@ def AddAccount(row_data):
     account.website = website
     account.created_by = User.objects.get(pk=1)
     account.save()
+    account.teams.add(team)
 
 def index(request):
     if "GET" ==  request.method: 
@@ -170,6 +171,7 @@ class CreateAccountView(CreateView):
         return super(CreateAccountView, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
+        # set giá trị cho 'assigned_to' của kwargs
         kwargs = super(CreateAccountView, self).get_form_kwargs()
         kwargs.update({'assigned_to': self.users})
         return kwargs
@@ -179,9 +181,18 @@ class CreateAccountView(CreateView):
         form = self.get_form()
         billing_form = BillingAddressForm(request.POST)
         shipping_form = ShippingAddressForm(request.POST, prefix='ship')
-        if form.is_valid() and billing_form.is_valid() and shipping_form.is_valid():
+        if form.is_valid(): #and billing_form.is_valid() and shipping_form.is_valid():
+            print("form valid")
+            
             return self.form_valid(form, billing_form, shipping_form)
         else:
+            print("form invalid")
+            print(form.errors)
+            # for field, errors in form.errors.items:
+            #     for error in errors:
+            #         print(field, error)
+
+
             return self.form_invalid(form, billing_form, shipping_form)
 
     def form_valid(self, form, billing_form, shipping_form):

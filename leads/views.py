@@ -96,6 +96,8 @@ def AddLead(row_data):
     lead.phone = dienthoai
     lead.address = address
     lead.website = website
+    lead.status = status
+    lead.source = source
     lead.created_by = User.objects.get(pk=1)
     lead.save()
 def index(request):
