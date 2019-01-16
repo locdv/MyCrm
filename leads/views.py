@@ -16,17 +16,21 @@ from django.shortcuts import render
 from django.views.generic import (CreateView, UpdateView, DetailView, ListView, DeleteView, TemplateView)
 from django.template import loader
 from django.contrib.auth.models import User
+from django.db.models import Q
 import openpyxl
+from phonenumber_field.modelfields import PhoneNumberField
 
 from .models import Lead
 from accounts.forms import AccountForm
-from common.models import Address, Team
-from common.utils import  INDCHOICES, COUNTRIES, CURRENCY_CODES, CASE_TYPE, PRIORITY_CHOICE, STATUS_CHOICE
+from .forms import LeadForm
+from common.models import Address, Team, Comment, Attachments
+from common.utils import  INDCHOICES, COUNTRIES, CURRENCY_CODES, CASE_TYPE, PRIORITY_CHOICE, STATUS_CHOICE, LEAD_STATUS
 from opportunity.models import Opportunity, STAGES, SOURCES
 from common.forms import BillingAddressForm, ShippingAddressForm
 from contacts.models import Contact
 from cases.models import Case
 from opportunity.models import Opportunity
+from planner.models import Event
 # Create your views here.
 
 
@@ -100,6 +104,7 @@ def AddLead(row_data):
     lead.source = source
     lead.created_by = User.objects.get(pk=1)
     lead.save()
+    lead.teams.add(team)
 def index(request):
     if "GET" ==  request.method: 
         return render(request, 'leads/index_lead.html', {})
@@ -250,35 +255,25 @@ class CreateLeadView(CreateView):
 
 class DetailLeadView(DetailView):
     model = Lead
-    context_object_name = "account_record"
-    template_name = "accounts/view_account.html"
+    context_object_name = "lead_record"
+    template_name = "leads/view_lead.html"
 
     def get_context_data(self, **kwargs):
         context = super(DetailLeadView, self).get_context_data(**kwargs)
-        account_record = context["account_record"]
-        if (
-            self.request.user in account_record.assigned_to.all() or
-            self.request.user == account_record.created_by
-        ):
-            comment_permission = True
-        else:
-            comment_permission = False
+        comments = Comment.objects.filter(lead_id=self.object.id).order_by('-id')
+        attachments = Attachments.objects.filter(lead_id=self.object.id).order_by('-id')
+        events = Event.objects.filter(
+            Q(created_by=self.request.user) | Q(updated_by=self.request.user)).filter(attendees_leads=context["lead_record"])
+        meetings = events.filter(event_type='Meeting').order_by('-id')
+        calls = events.filter(event_type='Call').order_by('-id')
+        
         context.update({
-            "comments": account_record.accounts_comments.all(),
-            "attachments": account_record.account_attachment.all(),
-            "opportunity_list": Opportunity.objects.filter(account=account_record),
-            "contacts": Contact.objects.filter(account=account_record),
-            "users": User.objects.filter(is_active=True).order_by('email'),
-            "cases": Case.objects.filter(account=account_record),
-            "teams": Team.objects.all(),
-            "stages": STAGES,
-            "sources": SOURCES,
+            "comments": comments,
+            "attachments": attachments,
+            "status": LEAD_STATUS,
+            "meetings": meetings,
+            "calls": calls,
             "countries": COUNTRIES,
-            "currencies": CURRENCY_CODES,
-            "case_types": CASE_TYPE,
-            "case_priority": PRIORITY_CHOICE,
-            "case_status": STATUS_CHOICE,
-            'comment_permission': comment_permission,
         })
         return context
 class UpdateLeadView(UpdateView):
@@ -375,14 +370,12 @@ class UpdateLeadView(UpdateView):
 
 class DeleteLeadView(DeleteView):
     model = Lead
-    form_class = AccountForm
-    template_name = "accounts/remove_account.html"
+    form_class = LeadForm
+    template_name = "leads/remove_lead.html"
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if self.object.billing_address:
-            self.object.billing_address.delete()
-        if self.object.shipping_address:
-            self.object.shipping_address.delete()
-        self.object.delete()
-        return redirect("accounts:list")
+        if self.object.address:
+            self.object.address.delete()
+       
+        return redirect("leads:list")
