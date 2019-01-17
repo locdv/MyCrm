@@ -4,7 +4,7 @@ index: view này để import thông tin từ file datatest vào trong database
 LeadsListView: hiển thị danh sách các lead
 CreateLeadView: cho phép tạo một lead mới
 UpdateLeadView: cho phép cập nhật thông tin cho lead
-UpdateLeadView: hiển thị thông tin chi tiết cho một lead
+DetailLeadView: hiển thị thông tin chi tiết cho một lead
 DeleteLeadView: xóa một lead
 """
 from django.contrib.sites.shortcuts import get_current_site

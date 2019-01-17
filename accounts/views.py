@@ -4,7 +4,7 @@ index: view này để import thông tin từ file datatest vào trong database
 AccountsListView: hiển thị danh sách các account
 CreateAccountView: cho phép tạo một account mới
 UpdateAccoutView: cho phép cập nhật thông tin cho account
-UpdateAccountView: hiển thị thông tin chi tiết cho một account
+DetailAccountView: hiển thị thông tin chi tiết cho một account
 DeleteAccountView: xóa một account
 """
 from django.contrib.sites.shortcuts import get_current_site
